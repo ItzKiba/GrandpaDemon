@@ -1,0 +1,35 @@
+{
+	"geode": "2.0.0",
+	"version": "v1.0.0",
+	"id": "itzkiba.grandpa_demon",
+	"name": "Grandpa Demon",
+	"developer": "ItzKiba",
+	"description": "Adds additional demon difficulties",
+	"resources": {
+        "spritesheets": {
+			"GrD_IconSheet": [
+				"resources/demons/*.png"
+			],
+			"GrD_ReadmeSheet": [
+				"resources/readme/*.png"
+			]
+		},
+		"sprites": [
+			"resources/GrD_demon4_bg.png"
+		]
+    },
+	"settings": {
+		"grandpa-demon-disable": {
+			"name": "Disable Grandpa Demon",
+			"description": "Disables the Grandpa Demon difficulty for the current Top 1 Demon (replaced with Infinite Demon instead).",
+			"type": "bool",
+			"default": false
+		},
+		"infinite-demon-disable": {
+			"name": "Disable BG Effects",
+			"description": "Removes the background effects for Legendary, Mythical, and Infinite Demon level pages.",
+			"type": "bool",
+			"default": false
+		}
+	}
+}
