@@ -36,6 +36,7 @@ class $modify(LevelCell) {
                         if (CCSprite* newObj2 = dynamic_cast<CCSprite*>(obj2)) {
                             if (newObj2->getZOrder() == 3) {
                                 originalIcon = newObj2;
+                                break;
                             }
                         }
                     }

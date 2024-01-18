@@ -7,7 +7,8 @@
 
 using namespace geode::prelude;
 
-class $modify(LevelInfoLayer) {
+class $modify(GrDInfoLayer, LevelInfoLayer) {
+    bool m_hasBeenOpened = false;
 
     void updateDifficultyFace() {
 
@@ -28,12 +29,12 @@ class $modify(LevelInfoLayer) {
                 // Check to see if the object is the demon difficulty icon
                 // Note that the child-index "stars-icon" doesn't appear to work all the time.
                 // Instead of using an absolute index, get the object that fits the following criteria:
-                if (newObj->getPositionX() > 130 && newObj->getPositionX() < 200
-                && newObj->getPositionY() > 200 && newObj->getPositionY() < 250
+                if (newObj->getPosition() == m_difficultySprite->getPosition()
                 && newObj->getZOrder() == 3) {
                     //newObj->setColor({0, 255, 0});
                     originalIcon = newObj;
                     iconFound = true;
+                    break;
                 }
             }
         }
@@ -77,6 +78,10 @@ class $modify(LevelInfoLayer) {
 
         this->addChild(newIcon);
         
+        if (m_fields->m_hasBeenOpened) {
+            return;
+        }
+
         if (aredlPos <= 24) {
             EffectsManager::infinityBackground(this, aredlPos);
             EffectsManager::addInfinitySymbol(newIcon->getPosition(), this, aredlPos);
@@ -90,6 +95,7 @@ class $modify(LevelInfoLayer) {
             EffectsManager::legendaryBackground(this, aredlPos);
         }
         
+        m_fields->m_hasBeenOpened = true;
         return;
     }
 
@@ -103,9 +109,6 @@ class $modify(LevelInfoLayer) {
             return;
         }
         
-        // if (this->getChildByID("grd-difficulty") != nullptr) {
-        //     return;
-        // }
         updateDifficultyFace();
     }
 };
