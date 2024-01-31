@@ -245,7 +245,7 @@ class EffectsManager {
             bg1->setPosition({winSize.width / 2, 0});
             bg1->setZOrder(-5);
             float bg1_height = bg1->getScaledContentSize().height;
-            auto movedown1 = CCMoveTo::create(20, {winSize.width / 2, bg1_height * -0.5f});
+            auto movedown1 = CCMoveTo::create(20, {winSize.width / 2, bg1_height * -0.35f});
 
             auto moveup1 = CCMoveTo::create(0, {winSize.width / 2, 0});
             auto move_seq1 = CCSequence::create(movedown1, moveup1, nullptr);

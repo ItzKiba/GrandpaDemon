@@ -20,20 +20,11 @@ class $modify(MenuLayer) {
 			.then([](std::string const& str) {
 				ListManager::parseRequestString(str);
 				ListManager::firstTimeOpen = true;
-
-				// debug
-				// std::string testString = "";
-				// for (int i = 0; i < ListManager::demonIDList.size(); i++) {
-				// 	testString = testString + std::to_string(ListManager::demonIDList.at(i)) + "   ";
-				// }
-
-				// int test = ListManager::getPositionOfID(123);
-				// testString = testString + std::to_string(test);
-
-				//FLAlertLayer::create("Success!", std::to_string(ListManager::demonIDList.size()).c_str(), "OK")->show();
+				ListManager::filterType = -1;
 			})
 			.expect([](std::string const& error) {
 				ListManager::firstTimeOpen = true;
+				ListManager::filterType = -2;
 				std::string errorStr = "\n\n<cr>Could not load data from AREDL.</c>\nThe API could be down, but chances are, your internet just sucks.\n\n<cg>Restart your game to try again.</c>\n\n<cb>-Grandpa Demon</c>";
 				FLAlertLayer::create("What the??", error + errorStr, "OK")->show();
 			});

@@ -13,7 +13,7 @@ The humble Extreme Demon is the highest difficulty in all of Geometry Dash. **Ho
 * ***Grandpa Demon!***
 
 
-**Additionally, the highest demon difficulties each have their own **animated backgrounds** for the level page!*
+**Additionally, the highest demon difficulties each have their own **animated backgrounds** and **particles** for the level page!*
 
 ![Demons](resources/readme/demons.png)
 

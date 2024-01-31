@@ -1,6 +1,6 @@
 {
 	"geode": "2.0.0",
-	"version": "v1.0.1",
+	"version": "v1.1.0",
 	"gd": "2.204",
 	"id": "itzkiba.grandpa_demon",
 	"name": "Grandpa Demon",
@@ -29,6 +29,12 @@
 		"infinite-demon-disable": {
 			"name": "Disable BG Effects",
 			"description": "Removes the background effects for Legendary, Mythical, and Infinite Demon level pages.",
+			"type": "bool",
+			"default": false
+		},
+		"particles-disable": {
+			"name": "Disable Particles",
+			"description": "Removes particles from Legendary, Mythical, and Infinite Demon level pages.",
 			"type": "bool",
 			"default": false
 		}

@@ -10,7 +10,16 @@ project(GrandpaDemon VERSION 1.0.0)
 # to recursively add all source files 
 # under src/ 
 file(GLOB SOURCES
-	src/*.cpp
+	src/main.cpp
+    src/ListManager.h
+    src/LevelInfoLayer.cpp
+    src/LevelCell.cpp
+    src/EffectsManager.h
+    src/LevelSearchLayer.cpp
+    src/DemonFilterSelectLayer.cpp
+    src/LevelBrowserLayer.cpp
+    src/CreatorLayer.cpp
+    src/ParticleManager.h
 )
 
 # Set up the mod binary
