@@ -1,7 +1,10 @@
 {
 	"geode": "2.0.0",
 	"version": "v1.1.0",
-	"gd": "2.204",
+	"gd": {
+		"win": "2.204",
+		"android": "2.205"
+	},
 	"id": "itzkiba.grandpa_demon",
 	"name": "Grandpa Demon",
 	"developer": "ItzKiba",
