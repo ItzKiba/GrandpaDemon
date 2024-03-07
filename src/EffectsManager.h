@@ -97,6 +97,7 @@ class EffectsManager {
             bg1->setOpacity(0);
             bg1->setScale(bg1_scale);
             bg1->setColor({ 249, 249, 165 });
+			bg1->setID("grd-infinity-bg-1");
             layer->addChild(bg1);
             bg1->setAnchorPoint({0.5, 0});
             bg1->setPosition({winSize.width / 2, 0});
@@ -146,6 +147,7 @@ class EffectsManager {
             bg2->setOpacity(0);
             bg2->setScale(bg1_scale * 2.f);
             bg2->setColor({ 231, 231, 195 });
+			bg2->setID("grd-infinity-bg-2");
             layer->addChild(bg2);
             bg2->setAnchorPoint({0.5, 0});
             bg2->setPosition({winSize.width / 2, 0});
@@ -240,6 +242,7 @@ class EffectsManager {
             bg1->setOpacity(0);
             bg1->setScale(bg1_scale);
             bg1->setColor({ 76, 63, 118 });
+			bg1->setID("grd-mythical-bg-1");
             layer->addChild(bg1);
             bg1->setAnchorPoint({0.5, 0});
             bg1->setPosition({winSize.width / 2, 0});
@@ -325,6 +328,7 @@ class EffectsManager {
             bg1->setOpacity(0);
             bg1->setScale(bg1_scale);
             bg1->setColor({ 55, 48, 78 });
+			bg1->setID("grd-legendary-bg-1");
             layer->addChild(bg1);
             bg1->setAnchorPoint({0.5, 0});
             bg1->setPosition({winSize.width / 2, 0});
