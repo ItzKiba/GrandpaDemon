@@ -4,19 +4,28 @@
 
 class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
 
-    CCSprite* m_demon0Spr = nullptr;
-    CCSprite* m_demon1Spr = nullptr;
-    CCSprite* m_demon2Spr = nullptr;
-    CCSprite* m_demon3Spr = nullptr;
-    CCSprite* m_demon4Spr = nullptr;
-    CCSprite* m_demon5Spr = nullptr;
+    struct Fields {
+        CCSprite* m_demon0Spr = nullptr;
+        CCSprite* m_demon1Spr = nullptr;
+        CCSprite* m_demon2Spr = nullptr;
+        CCSprite* m_demon3Spr = nullptr;
+        CCSprite* m_demon4Spr = nullptr;
+        CCSprite* m_demon5Spr = nullptr;
+    };
+    
 
     static void onModify(auto &self) {
         self.setHookPriority("DemonFilterSelectLayer::init", -1);
     }
 
     bool init() {
+        
         DemonFilterSelectLayer::init();
+
+        if (ListManager::demonIDList.empty()) {
+            return true;
+        }
+
         handleTouchPriority(this);
         CCLayer* layer = nullptr;
 
@@ -105,11 +114,13 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
         auto demon4Btn = CCMenuItemSpriteExtra::create(demon4Spr, this, menu_selector(GrdDemonFilterSelectLayer::onButton4));
         newMenu->addChild(demon4Btn);
 
-        auto demon5Spr = CCSprite::createWithSpriteFrameName("GrD_demon5_text.png"_spr);
-        this->m_fields->m_demon5Spr = demon5Spr;
-        auto demon5Btn = CCMenuItemSpriteExtra::create(demon5Spr, this, menu_selector(GrdDemonFilterSelectLayer::onButton5));
-        newMenu->addChild(demon5Btn);
-
+        if (!(Mod::get()->getSettingValue<bool>("grandpa-demon-disable"))) {
+            auto demon5Spr = CCSprite::createWithSpriteFrameName("GrD_demon5_text.png"_spr);
+            this->m_fields->m_demon5Spr = demon5Spr;
+            auto demon5Btn = CCMenuItemSpriteExtra::create(demon5Spr, this, menu_selector(GrdDemonFilterSelectLayer::onButton5));
+            newMenu->addChild(demon5Btn);
+        }   
+        
         newMenu->updateLayout();
         
         return true;

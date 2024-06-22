@@ -1,6 +1,5 @@
 #ifndef EFFECTSMANAGER_H
 #define EFFECTSMANAGER_H
-#include <vector>
 
 using namespace geode::prelude;
 

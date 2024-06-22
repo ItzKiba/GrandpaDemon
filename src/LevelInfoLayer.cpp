@@ -9,8 +9,11 @@
 using namespace geode::prelude;
 
 class $modify(GrDInfoLayer, LevelInfoLayer) {
-    bool m_hasBeenOpened = false;
 
+    struct Fields {
+        bool m_hasBeenOpened = false;
+    };
+    
     void updateDifficultyFace() {
 
         int aredlPos = ListManager::getPositionOfID(m_level->m_levelID);

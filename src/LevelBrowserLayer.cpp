@@ -3,9 +3,12 @@
 #include "ListManager.h"
 
 class $modify(GrDLevelBrowserLayer, LevelBrowserLayer) {
-    int m_currentPage = 0;
-    int m_furthestLoadedPage = 0;
-    int m_lowIdx = 0;
+
+    struct Fields {
+        int m_currentPage = 0;
+        int m_furthestLoadedPage = 0;
+        int m_lowIdx = 0;
+    };
 
     bool init(GJSearchObject* p0) {
 
