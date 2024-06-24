@@ -45,7 +45,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
 
         // If the demon face somehow isn't found, notify the user.
         if (originalIcon == nullptr || !iconFound) {
-            auto alert = FLAlertLayer::create("Error", "There was a problem loading the demon difficulty face.\nYour sceen resolution may not be supported.\n\n<cb>-Grandpa Demon</c>", "OK");
+            auto alert = FLAlertLayer::create("Error", "There was a problem loading the demon difficulty face.\nYour screen resolution may not be supported.\n\n<cb>-Grandpa Demon</c>", "OK");
             alert->m_scene = this;
             alert->show();
             return;
@@ -99,10 +99,12 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
 
                 auto particle1 = ParticleManager::infiniteParticles1(50, isGrandpa);
                 particle1->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+                particle1->setID("grd-infinity-particles-1");
                 this->addChild(particle1);
 
                 auto particle2 = ParticleManager::infiniteParticles2(50);
                 particle2->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+                particle2->setID("grd-infinity-particles-2");
                 this->addChild(particle2);
             }
 
@@ -114,6 +116,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
             if (!Mod::get()->getSettingValue<bool>("particles-disable")) {
                 auto particle = ParticleManager::mythicalParticles(50);
                 particle->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+				particle->setID("grd-mythical-particles");
                 this->addChild(particle);
             }
             
@@ -125,6 +128,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
             if (!Mod::get()->getSettingValue<bool>("particles-disable")) {
                 auto particle = ParticleManager::legendaryParticles(50);
                 particle->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+				particle->setID("grd-legendary-particles");
                 this->addChild(particle);
             }
       
