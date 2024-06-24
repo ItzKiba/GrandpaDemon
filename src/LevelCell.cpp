@@ -24,57 +24,17 @@ class $modify(LevelCell) {
             return;
         }
 
-        CCSprite* originalIcon = nullptr;
-
-        CCObject* obj;
-        CCARRAY_FOREACH(m_mainLayer->getChildren(), obj) {
-            if (CCNode* newObj = dynamic_cast<CCNode*>(obj)) {
-                if (newObj->getZOrder() == 2) {
-                    newObj->setID("grd-demon-icon-layer");
-                    CCObject* obj2;
-                    CCARRAY_FOREACH(newObj->getChildren(), obj2) {
-                        if (CCSprite* newObj2 = dynamic_cast<CCSprite*>(obj2)) {
-                            if (newObj2->getZOrder() == 3) {
-                                originalIcon = newObj2;
-                                break;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        if (originalIcon == nullptr) {
-            return;
-        }
+        auto layer = m_mainLayer->getChildByID("difficulty-container");
+        CCSprite* originalIcon = static_cast<CCSprite*>(layer->getChildByID("difficulty-sprite"));
 
         CCSprite* newIcon = ListManager::getSpriteFromPosition(aredlPos, false);
         //CCSprite* newIcon = CCSprite::createWithSpriteFrameName("GrD_demon0.png"_spr);
-        auto layer = m_mainLayer->getChildByID("grd-demon-icon-layer");
+        newIcon->setID("grd-difficulty");
 
-        auto newPos = originalIcon->getPosition();
         newIcon->setPosition(originalIcon->getPosition());
         newIcon->setZOrder(originalIcon->getZOrder()+25);
-        
-        CCObject* clearObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), clearObj) {
-            if (CCSprite* newObj = dynamic_cast<CCSprite*>(clearObj)) {
-                if (newObj->getTag() == 69420) {
-                    newObj->removeFromParentAndCleanup(true);
-                }
-            }
-        }
 
-        CCObject* iconObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), iconObj) {
-            if (CCSprite* newObj = dynamic_cast<CCSprite*>(iconObj)) {
-                newObj->setTag(69420);
-                layer->addChild(newObj);
-                newObj->setPosition(newPos);
-            }
-        }
-
-        originalIcon->setVisible(false);
+        originalIcon->setOpacity(0);
 
         layer->addChild(newIcon);
 
