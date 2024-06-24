@@ -16,7 +16,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
     
     void updateDifficultyFace() {
 
-        if (this->getChildByID("grd-difficulty")) {
+        if (m_fields->m_hasBeenOpened) {
             return;
         }
 
@@ -35,10 +35,6 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
         m_difficultySprite->setOpacity(0);
 
         this->addChild(newIcon);
-        
-        if (m_fields->m_hasBeenOpened) {
-            return;
-        }
 
         if (aredlPos <= 24) {
             EffectsManager::infinityBackground(this, aredlPos);
