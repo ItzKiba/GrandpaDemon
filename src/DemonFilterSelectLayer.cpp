@@ -15,7 +15,7 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
     
 
     static void onModify(auto &self) {
-        self.setHookPriority("DemonFilterSelectLayer::init", -1);
+        (void)self.setHookPriority("DemonFilterSelectLayer::init", -1);
     }
 
     bool init() {
@@ -129,37 +129,37 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
     void onButton0(CCObject* sender) {
         ListManager::filterType = 0;
         ListManager::isSupremeSearching = true;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(349, 249)); // should go to 499
-        geode::cocos::switchToScene(browserLayer);
+        auto browserLayer = LevelBrowserLayer::scene(ListManager::getSearchObject(349, 249)); // should go to 499
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, browserLayer));
     }
     void onButton1(CCObject* sender) {
         ListManager::filterType = 1;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(249, 149));
-        geode::cocos::switchToScene(browserLayer);
+        auto browserLayer = LevelBrowserLayer::scene(ListManager::getSearchObject(249, 149));
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, browserLayer));
     }
     void onButton2(CCObject* sender) {
         ListManager::filterType = 2;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(149, 74));
-        geode::cocos::switchToScene(browserLayer);
+        auto browserLayer = LevelBrowserLayer::scene(ListManager::getSearchObject(149, 74));
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, browserLayer));
     }
     void onButton3(CCObject* sender) {
         ListManager::filterType = 3;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(74, 24));
-        geode::cocos::switchToScene(browserLayer);
+        auto browserLayer = LevelBrowserLayer::scene(ListManager::getSearchObject(74, 24));
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, browserLayer));
     }
     void onButton4(CCObject* sender) {
         ListManager::filterType = 4;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(24, 0));
-        geode::cocos::switchToScene(browserLayer);
+        auto browserLayer = LevelBrowserLayer::scene(ListManager::getSearchObject(24, 0));
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, browserLayer));
     }
     void onButton5(CCObject* sender) {
         ListManager::filterType = 5;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(0, 0));
-        geode::cocos::switchToScene(browserLayer);
+        auto browserLayer = LevelBrowserLayer::scene(ListManager::getSearchObject(0, 0));
+        CCDirector::sharedDirector()->pushScene(CCTransitionFade::create(0.5f, browserLayer));
     }
 };
