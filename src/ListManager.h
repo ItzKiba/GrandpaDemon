@@ -91,7 +91,9 @@ class ListManager {
                         return CCSprite::createWithSpriteFrameName("GrD_demon5.png"_spr);
                     }
                 }
-            } 
+            }
+
+            return nullptr;
         }
 
         inline static GJSearchObject* getSearchObject(int upper, int lower) {

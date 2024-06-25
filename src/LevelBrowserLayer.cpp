@@ -42,6 +42,11 @@ class $modify(GrDLevelBrowserLayer, LevelBrowserLayer) {
         
     // }
 
+    void onBack(CCObject* sender) {
+        LevelBrowserLayer::onBack(sender);
+        ListManager::isSupremeSearching = false;
+    }
+
     void loadLevelsFinished(cocos2d::CCArray* p0, char const* p1, int p2) {
         LevelBrowserLayer::loadLevelsFinished(p0, p1, p2);
         if (!ListManager::isSupremeSearching) {
