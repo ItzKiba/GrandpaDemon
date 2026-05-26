@@ -11,23 +11,17 @@ class $modify(GrDLevelBrowserLayer, LevelBrowserLayer) {
     };
 
     bool init(GJSearchObject* p0) {
+        if (!ListManager::isSupremeSearching)
+            return LevelBrowserLayer::init(p0);
 
-        if (!ListManager::isSupremeSearching) {
-            LevelBrowserLayer::init(p0);
-            return true;
-        }
-
-        if (p0->m_searchType != SearchType::Type19) {
-            LevelBrowserLayer::init(p0);
-            return true;
-        }
+        if (p0->m_searchType != SearchType::Type19)
+            return LevelBrowserLayer::init(p0);
 
         this->m_fields->m_currentPage = 0;
         int page = this->m_fields->m_currentPage;
         this->m_fields->m_lowIdx = page * 10;
 
-        LevelBrowserLayer::init(ListManager::getSearchObject(499, 489));
-        return true;
+        return LevelBrowserLayer::init(ListManager::getSearchObject(499, 489));
     }
 
     // TodoReturn loadPage(GJSearchObject* p0) {
@@ -66,34 +60,26 @@ class $modify(GrDLevelBrowserLayer, LevelBrowserLayer) {
     }
 
     void onNextPage(CCObject* sender) {
-        LevelBrowserLayer::onNextPage(sender);
-        if (!ListManager::isSupremeSearching) {
-            return;
-        }
-        if (this->m_searchObject->m_searchType != SearchType::Type19) {
+        if (!ListManager::isSupremeSearching || this->m_searchObject->m_searchType != SearchType::Type19) {
+            LevelBrowserLayer::onNextPage(sender);
             return;
         }
 
         if (this->m_fields->m_currentPage < 24) {
             this->m_fields->m_currentPage += 1;
+            nextBtnActions();
         }
-        nextBtnActions();
-        
     }
 
     void onPrevPage(CCObject* sender) {
-        LevelBrowserLayer::onPrevPage(sender);
-        if (!ListManager::isSupremeSearching) {
-            return;
-        }
-        if (this->m_searchObject->m_searchType != SearchType::Type19) {
+        if (!ListManager::isSupremeSearching || this->m_searchObject->m_searchType != SearchType::Type19) {
+            LevelBrowserLayer::onPrevPage(sender);
             return;
         }
         if (this->m_fields->m_currentPage > 0) {
             this->m_fields->m_currentPage -= 1;
-        }
-        nextBtnActions();
-        
+            nextBtnActions();
+        }   
     }
 
     void nextBtnActions() {
@@ -106,4 +92,3 @@ class $modify(GrDLevelBrowserLayer, LevelBrowserLayer) {
         this->m_countText->setString(fmt::format("{} to {} of 250", this->m_fields->m_currentPage * 10 + 1, this->m_fields->m_currentPage * 10 + 10).c_str());
     }
 };
-

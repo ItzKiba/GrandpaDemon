@@ -26,8 +26,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
         bool iconFound = false;
 
         // Iterate through every object that is a direct child of the layer to find the difficulty face.
-        CCObject* obj;
-        CCARRAY_FOREACH(this->getChildren(), obj) {
+        for (auto obj : CCArrayExt<CCObject*>(this->getChildren()))
             // Check to see if the object is a sprite.
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(obj)) {
                 // Check to see if the object is the demon difficulty icon
@@ -41,7 +40,6 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
                     break;
                 }
             }
-        }
 
         // If the demon face somehow isn't found, notify the user.
         if (originalIcon == nullptr || !iconFound) {
@@ -51,6 +49,8 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
             return;
         }
 
+        if(auto existing = this->getChildByID("grd-difficulty"))
+            existing->removeFromParentAndCleanup(true);
         CCSprite* newIcon = ListManager::getSpriteFromPosition(aredlPos, true);
         //CCSprite* newIcon = CCSprite::createWithSpriteFrameName("GrD_demon0_text.png"_spr);
         newIcon->setID("grd-difficulty");
@@ -60,23 +60,18 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
         newIcon->setZOrder(originalIcon->getZOrder()+10);
         
 
-        CCObject* clearObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), clearObj) {
-            if (CCSprite* newObj = dynamic_cast<CCSprite*>(clearObj)) {
-                if (newObj->getTag() == 69420) {
-                    newObj->removeFromParentAndCleanup(true);
-                }
-            }
-        }
+        std::vector<CCSprite*>nodesDel;
+        for (auto clearObj : CCArrayExt<CCObject*>(originalIcon->getChildren()))
+            if (CCSprite* newObj = dynamic_cast<CCSprite*>(clearObj))
+                if (newObj->getTag() == 133769420) nodesDel.push_back(newObj);
+        for(auto newObj:nodesDel) newObj->removeFromParentAndCleanup(true);
 
-        CCObject* iconObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), iconObj) {
+        for (auto iconObj : CCArrayExt<CCObject*>(originalIcon->getChildren()))
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(iconObj)) {
-                newObj->setTag(69420);
+                newObj->setTag(133769420);
                 this->addChild(newObj);
                 newObj->setPosition(newPos);
             }
-        }
 
         originalIcon->setVisible(false);
 
@@ -97,13 +92,15 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
                     isGrandpa = true;
                 }
 
-                auto particle1 = ParticleManager::infiniteParticles1(50, isGrandpa);
-                particle1->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
-                this->addChild(particle1);
+                if(auto particle1 = ParticleManager::infiniteParticles1(50, isGrandpa)){
+                    particle1->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+                    this->addChild(particle1);
+                }
 
-                auto particle2 = ParticleManager::infiniteParticles2(50);
-                particle2->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
-                this->addChild(particle2);
+                if(auto particle2 = ParticleManager::infiniteParticles2(50)){
+                    particle2->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+                    this->addChild(particle2);
+                }
             }
 
         }
@@ -111,22 +108,22 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
         if (aredlPos <= 74 && aredlPos > 24) {
             EffectsManager::mythicalBackground(this, aredlPos);
 
-            if (!Mod::get()->getSettingValue<bool>("particles-disable")) {
-                auto particle = ParticleManager::mythicalParticles(50);
-                particle->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
-                this->addChild(particle);
-            }
+            if (!Mod::get()->getSettingValue<bool>("particles-disable"))
+                if(auto particle = ParticleManager::mythicalParticles(50)){
+                    particle->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+                    this->addChild(particle);
+                }
             
         }
 
         if (aredlPos <= 149 && aredlPos > 74) {
             EffectsManager::legendaryBackground(this, aredlPos);
 
-            if (!Mod::get()->getSettingValue<bool>("particles-disable")) {
-                auto particle = ParticleManager::legendaryParticles(50);
-                particle->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
-                this->addChild(particle);
-            }
+            if (!Mod::get()->getSettingValue<bool>("particles-disable"))
+                if(auto particle = ParticleManager::legendaryParticles(50)){
+                    particle->setPosition({newIcon->getPositionX(), newIcon->getPositionY() + 5.f});
+                    this->addChild(particle);
+                }
       
         }
         

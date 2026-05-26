@@ -16,6 +16,7 @@ class EffectsManager {
             }
 
             CCSprite* infinityBase = CCSprite::createWithSpriteFrameName("GrD_demon4_infinity.png"_spr);
+            if(!infinityBase) return;
             infinityBase->setZOrder(30);
             infinityBase->setColor({ 255, 233, 136 });
             infinityBase->setPositionX(iconPos.x - 0.4);
@@ -56,15 +57,10 @@ class EffectsManager {
             }
 
             CCSprite* bg = nullptr;
-
-            CCObject* obj;
-            CCARRAY_FOREACH(layer->getChildren(), obj) {
-                if (CCSprite* spr = dynamic_cast<CCSprite*>(obj)) {
-                    if (spr->getScaledContentSize().width >= CCDirector::sharedDirector()->getWinSize().width - 5) {
-                        bg = spr;
-                    }
-                }
-            }
+            for (auto obj : CCArrayExt<CCObject*>(layer->getChildren()))
+                if (CCSprite* spr = dynamic_cast<CCSprite*>(obj))
+                    if (spr->getScaledContentSize().width >= CCDirector::sharedDirector()->getWinSize().width - 5) bg = spr;
+            if(!bg) return;
 
             bg->setZOrder(-10);
             bg->setColor({75, 75, 0});
@@ -78,19 +74,14 @@ class EffectsManager {
             float bg2_maxAlpha = 90.f;
             float bg2_offsetAlpha = 50.f;
 
-            CCObject* rObj;
-            CCARRAY_FOREACH(layer->getChildren(), rObj) {
-                if (CCSprite* spr = dynamic_cast<CCSprite*>(rObj)) {
-                    if (spr->getPositionY() < 1) {
-                        spr->setOpacity(50);
-                    }
-                    
-                }
-            }
+            for (auto rObj : CCArrayExt<CCObject*>(layer->getChildren()))
+                if (CCSprite* spr = dynamic_cast<CCSprite*>(rObj))
+                    if (spr->getPositionY() < 1) spr->setOpacity(50);
 
             // BG 1
 
             CCSprite* bg1 = CCSprite::create("GrD_demon4_bg.png"_spr);
+            if(!bg1) return;
             bg1->setBlendFunc(blending);
             float bg1_scale = winSize.width / bg1->getContentSize().width; 
             bg1->setOpacity(0);
@@ -141,6 +132,7 @@ class EffectsManager {
             // BG 2
 
             CCSprite* bg2 = CCSprite::create("GrD_demon4_bg.png"_spr);
+            if(!bg2) return;
             bg2->setBlendFunc(blending);
             bg2->setOpacity(0);
             bg2->setScale(bg1_scale * 2.f);
@@ -202,15 +194,10 @@ class EffectsManager {
             }
 
             CCSprite* bg = nullptr;
-
-            CCObject* obj;
-            CCARRAY_FOREACH(layer->getChildren(), obj) {
-                if (CCSprite* spr = dynamic_cast<CCSprite*>(obj)) {
-                    if (spr->getScaledContentSize().width >= CCDirector::sharedDirector()->getWinSize().width - 5) {
-                        bg = spr;
-                    }
-                }
-            }
+            for (auto obj : CCArrayExt<CCObject*>(layer->getChildren()))
+                if (CCSprite* spr = dynamic_cast<CCSprite*>(obj))
+                    if (spr->getScaledContentSize().width >= CCDirector::sharedDirector()->getWinSize().width - 5) bg = spr;
+            if(!bg) return;
 
             bg->setZOrder(-10);
             bg->setColor({ 65, 41, 142 });
@@ -221,19 +208,14 @@ class EffectsManager {
             float bg1_maxAlpha = 50.f;
             float bg1_offsetAlpha = 130.f;
 
-            CCObject* rObj;
-            CCARRAY_FOREACH(layer->getChildren(), rObj) {
-                if (CCSprite* spr = dynamic_cast<CCSprite*>(rObj)) {
-                    if (spr->getPositionY() < 1) {
-                        spr->setOpacity(50);
-                    }
-                    
-                }
-            }
+            for (auto rObj : CCArrayExt<CCObject*>(layer->getChildren()))
+                if (CCSprite* spr = dynamic_cast<CCSprite*>(rObj))
+                    if (spr->getPositionY() < 1) spr->setOpacity(50);
 
             // BG 1
 
             CCSprite* bg1 = CCSprite::create("GrD_demon4_bg.png"_spr);
+            if(!bg1) return;
             bg1->setBlendFunc(blending);
             float bg1_scale = winSize.width / bg1->getContentSize().width; 
             bg1->setOpacity(0);
@@ -287,15 +269,10 @@ class EffectsManager {
             }
 
             CCSprite* bg = nullptr;
-
-            CCObject* obj;
-            CCARRAY_FOREACH(layer->getChildren(), obj) {
-                if (CCSprite* spr = dynamic_cast<CCSprite*>(obj)) {
-                    if (spr->getScaledContentSize().width >= CCDirector::sharedDirector()->getWinSize().width - 5) {
-                        bg = spr;
-                    }
-                }
-            }
+            for (auto obj : CCArrayExt<CCObject*>(layer->getChildren()))
+                if (CCSprite* spr = dynamic_cast<CCSprite*>(obj))
+                    if (spr->getScaledContentSize().width >= CCDirector::sharedDirector()->getWinSize().width - 5) bg = spr;
+            if(!bg) return;
 
             bg->setZOrder(-10);
             bg->setColor({ 207, 112, 254 });
@@ -306,19 +283,14 @@ class EffectsManager {
             float bg1_maxAlpha = 40.f;
             float bg1_offsetAlpha = 100.f;
 
-            CCObject* rObj;
-            CCARRAY_FOREACH(layer->getChildren(), rObj) {
-                if (CCSprite* spr = dynamic_cast<CCSprite*>(rObj)) {
-                    if (spr->getPositionY() < 1) {
-                        spr->setOpacity(50);
-                    }
-                    
-                }
-            }
+            for (auto rObj : CCArrayExt<CCObject*>(layer->getChildren()))
+                if (CCSprite* spr = dynamic_cast<CCSprite*>(rObj))
+                    if (spr->getPositionY() < 1) spr->setOpacity(50);
 
             // BG 1
 
             CCSprite* bg1 = CCSprite::create("GrD_demon4_bg.png"_spr);
+            if(!bg1) return;
             bg1->setBlendFunc(blending);
             float bg1_scale = winSize.width / bg1->getContentSize().width; 
             bg1->setOpacity(0);

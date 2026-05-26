@@ -4,10 +4,21 @@
 using namespace geode::prelude;
 
 class ParticleManager {
+    private:
+        static CCDictionary* getDict() {
+            static CCDictionary* dict = nullptr;
+            if(!dict) {
+                dict = CCDictionary::createWithContentsOfFile("dragEffect.plist");
+                dict->retain();
+            }
+            return dict;
+        }
+
     public:
 
     inline static CCParticleSystem* legendaryParticles(int numParticles) {
-            auto dict = CCDictionary::createWithContentsOfFileThreadSafe("dragEffect.plist");
+            auto dict = (CCDictionary*)getDict()->copy();
+            dict->autorelease();
 
             dict->setObject(CCString::create("1"), "emitterType");
             dict->setObject(CCString::create("-1"), "duration");
@@ -60,7 +71,8 @@ class ParticleManager {
 
 
         inline static CCParticleSystem* mythicalParticles(int numParticles) {
-            auto dict = CCDictionary::createWithContentsOfFileThreadSafe("dragEffect.plist");
+            auto dict = (CCDictionary*)getDict()->copy();
+            dict->autorelease();
 
             dict->setObject(CCString::create("1"), "emitterType");
             dict->setObject(CCString::create("-1"), "duration");
@@ -113,7 +125,8 @@ class ParticleManager {
 
 
         inline static CCParticleSystem* infiniteParticles1(int numParticles, bool isGrandpa) {
-            auto dict = CCDictionary::createWithContentsOfFileThreadSafe("dragEffect.plist");
+            auto dict = (CCDictionary*)getDict()->copy();
+            dict->autorelease();
 
             dict->setObject(CCString::create("1"), "emitterType");
             dict->setObject(CCString::create("-1"), "duration");
@@ -172,7 +185,8 @@ class ParticleManager {
         }
 
         inline static CCParticleSystem* infiniteParticles2(int numParticles) {
-            auto dict = CCDictionary::createWithContentsOfFileThreadSafe("dragEffect.plist");
+            auto dict = (CCDictionary*)getDict()->copy();
+            dict->autorelease();
 
             dict->setObject(CCString::create("1"), "emitterType");
             dict->setObject(CCString::create("-1"), "duration");

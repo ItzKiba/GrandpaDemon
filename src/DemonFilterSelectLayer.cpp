@@ -15,54 +15,35 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
     
 
     static void onModify(auto &self) {
-        self.setHookPriority("DemonFilterSelectLayer::init", -1);
+        (void)self.setHookPriority("DemonFilterSelectLayer::init", -1);
     }
 
     bool init() {
-        
-        DemonFilterSelectLayer::init();
+        if(!DemonFilterSelectLayer::init()) return false;
 
         if (ListManager::demonIDList.empty()) {
             return true;
         }
 
         handleTouchPriority(this);
-        CCLayer* layer = nullptr;
+        auto layer = this->getChildByType<CCLayer>(0);
+        if(!layer) return true;
 
-        CCObject* layerObj;
-        CCARRAY_FOREACH(this->getChildren(), layerObj) {
-            if (auto newObj = static_cast<CCLayer*>(layerObj)) {
-                layer = newObj;
-            }
-        }
-
-        CCScale9Sprite* s9spr = nullptr;
-        CCLabelBMFont* label = nullptr;
-        CCMenu* menu = nullptr;
-        
-        CCObject* obj;
-        CCARRAY_FOREACH(layer->getChildren(), obj) {
-            if (auto newObj = dynamic_cast<CCScale9Sprite*>(obj)) {
-                s9spr = newObj;
-            } else if (auto newObj2 = dynamic_cast<CCLabelBMFont*>(obj)) {
-                label = newObj2;
-            } else if (auto newObj3 = dynamic_cast<CCMenu*>(obj)) {
-                menu = newObj3;
-            }
-        }
+        auto s9spr = layer->getChildByType<CCScale9Sprite>(0);
+        auto label = layer->getChildByType<CCLabelBMFont>(0);
+        auto menu  = layer->getChildByType<CCMenu>(0);
+        if(!s9spr || !label || !menu) return true;
 
 
         // Find OK Button
         CCMenuItemSpriteExtra* okButton = nullptr;
-        CCObject* obj_ok;
-        CCARRAY_FOREACH(menu->getChildren(), obj_ok) {
-            if (auto newObj = dynamic_cast<CCMenuItemSpriteExtra*>(obj_ok)) {
+        for (auto obj_ok : menu->getChildrenExt())
+            if (auto newObj = typeinfo_cast<CCMenuItemSpriteExtra*>(obj_ok))
                 if (newObj->getPositionY() < 0) {
                     okButton = newObj;
                     break;
                 }
-            }
-        }
+        if(!okButton) return true;
 
         auto csize = s9spr->getContentSize();
         s9spr->setContentSize({csize.width, csize.height * 1.5f});
@@ -129,7 +110,7 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
     void onButton0(CCObject* sender) {
         ListManager::filterType = 0;
         ListManager::isSupremeSearching = true;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(349, 249)); // should go to 499
+        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(499, 249));
         geode::cocos::switchToScene(browserLayer);
     }
     void onButton1(CCObject* sender) {
@@ -153,13 +134,15 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
     void onButton4(CCObject* sender) {
         ListManager::filterType = 4;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(24, 0));
+        int lower = Mod::get()->getSettingValue<bool>("grandpa-demon-disable") ? -1 : 0;
+        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(24, lower));
         geode::cocos::switchToScene(browserLayer);
     }
     void onButton5(CCObject* sender) {
+        if(Mod::get()->getSettingValue<bool>("grandpa-demon-disable")) return; // just in case
         ListManager::filterType = 5;
         ListManager::isSupremeSearching = false;
-        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(0, 0));
+        auto browserLayer = LevelBrowserLayer::create(ListManager::getSearchObject(0, -1));
         geode::cocos::switchToScene(browserLayer);
     }
 };
