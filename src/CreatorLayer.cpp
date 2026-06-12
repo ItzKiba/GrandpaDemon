@@ -4,7 +4,9 @@
 
 class $modify(CreatorLayer) {
     bool init() {
-        CreatorLayer::init();
+        if (!CreatorLayer::init())
+            return false;
+            
         ListManager::isSupremeSearching = false;
         return true;
     }

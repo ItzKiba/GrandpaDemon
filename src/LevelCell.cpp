@@ -26,13 +26,11 @@ class $modify(LevelCell) {
 
         CCSprite* originalIcon = nullptr;
 
-        CCObject* obj;
-        CCARRAY_FOREACH(m_mainLayer->getChildren(), obj) {
+        for (auto* obj : CCArrayExt<CCNode*>(m_mainLayer->getChildren())) {
             if (CCNode* newObj = dynamic_cast<CCNode*>(obj)) {
                 if (newObj->getZOrder() == 2) {
                     newObj->setID("grd-demon-icon-layer");
-                    CCObject* obj2;
-                    CCARRAY_FOREACH(newObj->getChildren(), obj2) {
+                    for (auto* obj2 : CCArrayExt<CCNode*>(newObj->getChildren())) {
                         if (CCSprite* newObj2 = dynamic_cast<CCSprite*>(obj2)) {
                             if (newObj2->getZOrder() == 3) {
                                 originalIcon = newObj2;
@@ -56,8 +54,7 @@ class $modify(LevelCell) {
         newIcon->setPosition(originalIcon->getPosition());
         newIcon->setZOrder(originalIcon->getZOrder()+25);
         
-        CCObject* clearObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), clearObj) {
+        for (auto* clearObj : CCArrayExt<CCNode*>(originalIcon->getChildren())) {
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(clearObj)) {
                 if (newObj->getTag() == 69420) {
                     newObj->removeFromParentAndCleanup(true);
@@ -65,8 +62,7 @@ class $modify(LevelCell) {
             }
         }
 
-        CCObject* iconObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), iconObj) {
+        for (auto* iconObj : CCArrayExt<CCNode*>(originalIcon->getChildren())) {
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(iconObj)) {
                 newObj->setTag(69420);
                 layer->addChild(newObj);

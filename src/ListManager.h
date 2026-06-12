@@ -2,6 +2,7 @@
 #define LISTMANAGER_H
 #include <vector>
 #include <string>
+#include <matjson.hpp>
 
 using namespace geode::prelude;
 
@@ -12,17 +13,24 @@ class ListManager {
         inline static int filterType;
         inline static bool isSupremeSearching;
 
-        inline static void parseRequestString(std::string str) {
-            size_t isFound = str.find("_id");
+        inline static void parseRequestString(std::string const& str) {
+            demonIDList.clear();
 
-            while (isFound != std::string::npos) {
-                str = str.substr(isFound + 5);
-                size_t findBracket = str.find("}");
+            auto jsonRes = matjson::parse(str);
+            if (!jsonRes) return;
 
-                int id = stoi(str.substr(0, findBracket));
-                demonIDList.push_back(id);
+            auto json = jsonRes.unwrap();
+            if (!json.isArray()) return;
 
-                isFound = str.find("_id");
+            for (auto& item : json.asArray().unwrap()) {
+                if (!item.isObject()) continue;
+
+                auto& obj = item;
+
+                auto idRes = obj["level_id"].asInt();
+                if (!idRes) continue;
+
+                demonIDList.push_back(idRes.unwrap());
             }
         }
 
@@ -92,6 +100,8 @@ class ListManager {
                     }
                 }
             } 
+            
+            return nullptr;
         }
 
         inline static GJSearchObject* getSearchObject(int upper, int lower) {
@@ -116,5 +126,6 @@ class ListManager {
 
         
 };
+
 
 #endif

@@ -1,10 +1,11 @@
 {
-	"geode": "3.0.0",
-	"version": "v1.2.0",
+	"geode": "5.7.1",
+	"version": "v1.3.0",
 	"gd": {
-		"win": "2.206",
-		"android": "2.206",
-		"mac": "2.206"
+		"win": "2.2081",
+		"android": "2.2081",
+		"mac": "2.2081",
+		"ios": "2.2081"
 	},
 	"id": "itzkiba.grandpa_demon",
 	"name": "Grandpa Demon",
@@ -46,3 +47,4 @@
 	"tags": ["online", "enhancement", "interface"],
 	"repository": "https://github.com/ItzKiba/GrandpaDemon"
 }
+

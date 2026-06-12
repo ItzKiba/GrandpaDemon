@@ -26,8 +26,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
         bool iconFound = false;
 
         // Iterate through every object that is a direct child of the layer to find the difficulty face.
-        CCObject* obj;
-        CCARRAY_FOREACH(this->getChildren(), obj) {
+        for (auto* obj : CCArrayExt<CCNode*>(this->getChildren())) {
             // Check to see if the object is a sprite.
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(obj)) {
                 // Check to see if the object is the demon difficulty icon
@@ -60,8 +59,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
         newIcon->setZOrder(originalIcon->getZOrder()+10);
         
 
-        CCObject* clearObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), clearObj) {
+        for (auto* clearObj : CCArrayExt<CCNode*>(originalIcon->getChildren())) {
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(clearObj)) {
                 if (newObj->getTag() == 69420) {
                     newObj->removeFromParentAndCleanup(true);
@@ -69,8 +67,7 @@ class $modify(GrDInfoLayer, LevelInfoLayer) {
             }
         }
 
-        CCObject* iconObj;
-        CCARRAY_FOREACH(originalIcon->getChildren(), iconObj) {
+        for (auto* iconObj : CCArrayExt<CCNode*>(originalIcon->getChildren())) {
             if (CCSprite* newObj = dynamic_cast<CCSprite*>(iconObj)) {
                 newObj->setTag(69420);
                 this->addChild(newObj);

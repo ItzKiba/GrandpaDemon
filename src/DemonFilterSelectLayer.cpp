@@ -20,7 +20,8 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
 
     bool init() {
         
-        DemonFilterSelectLayer::init();
+        if (!DemonFilterSelectLayer::init())
+            return false;
 
         if (ListManager::demonIDList.empty()) {
             return true;
@@ -29,9 +30,8 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
         handleTouchPriority(this);
         CCLayer* layer = nullptr;
 
-        CCObject* layerObj;
-        CCARRAY_FOREACH(this->getChildren(), layerObj) {
-            if (auto newObj = static_cast<CCLayer*>(layerObj)) {
+        for (auto* layerObj : CCArrayExt<CCNode*>(this->getChildren())) {
+            if (auto newObj = dynamic_cast<CCLayer*>(layerObj)) {
                 layer = newObj;
             }
         }
@@ -40,8 +40,7 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
         CCLabelBMFont* label = nullptr;
         CCMenu* menu = nullptr;
         
-        CCObject* obj;
-        CCARRAY_FOREACH(layer->getChildren(), obj) {
+        for (auto* obj : CCArrayExt<CCNode*>(layer->getChildren())) {
             if (auto newObj = dynamic_cast<CCScale9Sprite*>(obj)) {
                 s9spr = newObj;
             } else if (auto newObj2 = dynamic_cast<CCLabelBMFont*>(obj)) {
@@ -54,9 +53,8 @@ class $modify(GrdDemonFilterSelectLayer, DemonFilterSelectLayer) {
 
         // Find OK Button
         CCMenuItemSpriteExtra* okButton = nullptr;
-        CCObject* obj_ok;
-        CCARRAY_FOREACH(menu->getChildren(), obj_ok) {
-            if (auto newObj = dynamic_cast<CCMenuItemSpriteExtra*>(obj_ok)) {
+        for (auto* obj : CCArrayExt<CCNode*>(menu->getChildren())) {
+            if (auto newObj = dynamic_cast<CCMenuItemSpriteExtra*>(obj)) {
                 if (newObj->getPositionY() < 0) {
                     okButton = newObj;
                     break;
